@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { isValidEmail, validatePassword } from '../utils/validators';
+import { isValidEmail } from '../utils/validators';
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -19,7 +19,6 @@ export default function Login() {
     e.preventDefault();
     setError('');
 
-    // Validation
     if (!isValidEmail(formData.email)) {
       setError('Invalid email format');
       return;
@@ -33,7 +32,6 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // Mock API call - replace with real API
       const mockUser = {
         id: 1,
         name: 'John Doe',
@@ -42,7 +40,7 @@ export default function Login() {
 
       login(mockUser, 'mock-token-12345');
       navigate('/');
-    } catch (err) {
+    } catch {
       setError('Invalid email or password');
     } finally {
       setLoading(false);
@@ -50,42 +48,42 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-xl p-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Connexion</h2>
-        <p className="text-gray-600 text-center mb-6">Connectez-vous à votre compte Scent Spray Me</p>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-600 to-pink-600 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
+        <h2 className="mb-2 text-center text-3xl font-bold text-gray-900">Connexion</h2>
+        <p className="mb-6 text-center text-gray-600">Connectez-vous a votre compte Scent Spray Me</p>
 
-        {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
+        {error && <div className="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-red-700">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               placeholder="vous@exemple.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Mot de passe</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="••••••••"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              placeholder="********"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+            className="w-full rounded-lg bg-purple-600 px-4 py-2 font-bold text-white transition-colors hover:bg-purple-700 disabled:bg-gray-400"
           >
             {loading ? 'Connexion en cours...' : 'Se connecter'}
           </button>
@@ -94,16 +92,14 @@ export default function Login() {
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Vous n'avez pas encore de compte?{' '}
-            <Link to="/signup" className="text-purple-600 hover:text-purple-700 font-semibold">
+            <Link to="/signup" className="font-semibold text-purple-600 hover:text-purple-700">
               S'inscrire
             </Link>
           </p>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-gray-200">
-          <p className="text-xs text-gray-500 text-center">
-            Démo: Utilisez n'importe quel email et mot de passe
-          </p>
+        <div className="mt-6 border-t border-gray-200 pt-6">
+          <p className="text-center text-xs text-gray-500">Demo: utilisez n'importe quel email et mot de passe</p>
         </div>
       </div>
     </div>

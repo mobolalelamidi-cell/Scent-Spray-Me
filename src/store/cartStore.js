@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export const useCartStore = create((set, get) => ({
+export const useCartStore = create((set) => ({
   items: [],
   total: 0,
 

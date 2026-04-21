@@ -24,7 +24,6 @@ export default function Signup() {
     e.preventDefault();
     setError('');
 
-    // Validation
     if (!formData.name.trim()) {
       setError('Name is required');
       return;
@@ -48,16 +47,15 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      // Mock API call - replace with real API
       const mockUser = {
         id: Date.now(),
         name: formData.name,
         email: formData.email,
       };
 
-      login(mockUser, 'mock-token-' + Date.now());
+      login(mockUser, `mock-token-${Date.now()}`);
       navigate('/');
-    } catch (err) {
+    } catch {
       setError('Failed to create account');
     } finally {
       setLoading(false);
@@ -65,76 +63,76 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-xl p-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Créer un compte</h2>
-        <p className="text-gray-600 text-center mb-6">Rejoignez Scent Spray Me et découvrez d'incroyables parfums</p>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-600 to-pink-600 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
+        <h2 className="mb-2 text-center text-3xl font-bold text-gray-900">Creer un compte</h2>
+        <p className="mb-6 text-center text-gray-600">Rejoignez Scent Spray Me et decouvrez d'incroyables parfums</p>
 
-        {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
+        {error && <div className="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-red-700">{error}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Nom complet</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               placeholder="Jean Dupont"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               placeholder="vous@exemple.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Mot de passe</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="••••••••"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              placeholder="********"
             />
-            <p className="text-xs text-gray-500 mt-1">Min 8 caractères, 1 majuscule, 1 chiffre</p>
+            <p className="mt-1 text-xs text-gray-500">Min 8 caracteres, 1 majuscule, 1 chiffre</p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
             <input
               type="password"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              placeholder="••••••••"
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              placeholder="********"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+            className="w-full rounded-lg bg-purple-600 px-4 py-2 font-bold text-white transition-colors hover:bg-purple-700 disabled:bg-gray-400"
           >
-            {loading ? 'Création en cours...' : 'Créer un compte'}
+            {loading ? 'Creation en cours...' : 'Creer un compte'}
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600">
-            Vous avez déjà un compte?{' '}
-            <Link to="/login" className="text-purple-600 hover:text-purple-700 font-semibold">
+            Vous avez deja un compte?{' '}
+            <Link to="/login" className="font-semibold text-purple-600 hover:text-purple-700">
               Se connecter
             </Link>
           </p>
